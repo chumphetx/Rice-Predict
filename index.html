@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Web App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <script>
+        function validateInput() {
+            var rev = document.forms["featureForm"]["rev"].value;
+            var cost = document.forms["featureForm"]["cost"].value;
+            var frm = document.forms["featureForm"]["frm"].value;
+            var tsk = document.forms["featureForm"]["tsk"].value;
+            var mrevn = document.forms["featureForm"]["mrevn"].value;
+            var mcost = document.forms["featureForm"]["mcost"].value;
+            var mplant = document.forms["featureForm"]["mplant"].value;
+            var costlost = document.forms["featureForm"]["costlost"].value;
+            var t_cost = document.forms["featureForm"]["t_cost"].value;
+            var alltime = document.forms["featureForm"]["alltime"].value;
+            var timelost_3 = document.forms["featureForm"]["timelost_3"].value;
+            var duration = document.forms["featureForm"]["duration"].value;
+
+        var error = "";
+            // Add validation for other features
+
+            var error = "";
+
+            if (!isNonNegativeInteger(rev) || !isNonNegativeInteger(cost) || !isNonNegativeInteger(frm) ||
+                !isNonNegativeInteger(tsk) || !isNonNegativeInteger(mrevn) || !isNonNegativeInteger(mcost) ||
+                !isNonNegativeInteger(mplant) || !isNonNegativeInteger(costlost) || !isNonNegativeInteger(t_cost) ||
+                !isNonNegativeInteger(alltime) || !isNonNegativeInteger(timelost_3) || !isNonNegativeInteger(duration)) {
+                error = "All features must be non-negative integers.";
+            }
+
+            if (error !== "") {
+                alert(error);
+                return false;
+            }
+
+            return true;
+        }
+
+        function isNonNegativeInteger(value) {
+            return /^\d+$/.test(value) && parseInt(value) >= 0;
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h1>พยากรความเสี่ยง</h1>
+        <form method="post" action="/index" name="featureForm" onsubmit="return validateInput();">
+            <label for="rev">ในรอบปีที่ผ่านมาท่านมี "รายได้" ต่อเดือน โดยประมาณบาทต่อเดือน :</label>
+            <input type="number" name="rev" required><br>
+
+            <label for="cost">ในรอบปีที่ผ่านมาท่านมี "ค่าใช้จ่าย" ต่อเดือน โดยประมาณบาทต่อเดือน :</label>
+            <input type="number" name="cost" required><br>
+
+            <label for="frm">ท่านเคยขึ้นทะเบียนเกษตรกรหรือไม่:</label>
+            <select name="frm" required>
+                <option value="1">เคย</option>
+                <option value="0">ไม่เคย</option>
+            </select><br>
+
+            <label for="tsk">ปัจจุบันท่านเป็นสมาชิก ธ.ก.ส. หรือไม่:</label>
+            <select name="tsk" required>
+                <option value="1">เคย</option>
+                <option value="0">ไม่เคย</option>
+            </select><br>
+
+            <label for="mrevn">รายได้รวมในการขายข้าว:</label>
+            <input type="number" name="mrevn" required><br>
+
+            <label for="mcost">ค่าใช้จ่ายต่อครั้งในการปลูกข้าว:</label>
+            <input type="number" name="mcost" required><br>
+
+            <label for="mplant">ปลูกข้าวกี่ครั้งต่อปี:</label>
+            <input type="number" name="mplant" required><br>
+
+            <label for="costlost">เมื่อท่านประสบภัยพิบัติตามธรรมชาติในแต่ละครั้งท่านประเมินความเสียหายเกิดขึ้น ค่าเสียหายรวมทั้งหมด รวมเป็นเงิน:</label>
+            <input type="number" name="costlost" required><br>
+
+            <label for="t_cost">ค่าใช้จ่ายในการเพาะปลูกข้าวทั้งหมด:</label>
+            <input type="number" name="t_cost" required><br>
+
+            <label for="alltime">ท่านเคยประสบภัยพิบัติตามธรรมชาติในพื้นที่เกษตรกรรมของท่านจำนวนกี่ครั้ง :</label>
+            <input type="number" name="alltime" required><br>
+
+            <label for="timelost_3">ท่านเคยประสบภัยพิบัติตามธรรมชาติในพื้นที่เกษตรกรรมของท่าน ย้อนหลัง 3 ปี กี่ครั้ง:</label>
+            <input type="number" name="timelost_3" required><br>
+            <label for="duration">เกิดภัยพิบัติขึ้นในช่วงใดของฤดูกาลเพาะปลูก:</label>
+            <input type="number" name="duration" required><br>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result %}
+            <h2>Results:</h2>
+            <p>R1: {{ result.features.r1 }}</p>
+            <p>R2: {{ result.features.r2 }}</p>
+            <p>R3: {{ result.features.r3 }}</p>
+            <p>R4: {{ result.features.r4 }}</p>
+            <p>R5: {{ result.features.r5 }}</p>
+            <p>R6: {{ result.features.r6 }}</p>
+            <p>R7: {{ result.features.r7 }}</p>
+            <p>R8: {{ result.features.r8 }}</p>
+
+            <h2>Prediction:</h2>
+            <p>{{ result.prediction }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
