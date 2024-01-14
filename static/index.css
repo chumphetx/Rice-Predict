@@ -1,0 +1,94 @@
+/* General Body Styling */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container Styling */
+div {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Header Styling */
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+/* Form Styling */
+form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+    font-weight: bold;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+}
+
+input[type="number"]:focus,
+select:focus {
+    border-color: #88a2ce;
+    outline: none;
+}
+
+/* Button Styling */
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue */
+}
+
+/* Results Section Styling */
+h2 {
+    color: #333;
+    text-align: center;
+}
+
+p {
+    background: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 5px solid #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    div {
+        width: 95%;
+    }
+}
